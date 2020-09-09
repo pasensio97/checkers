@@ -1,5 +1,5 @@
 import pygame
-from checkers.constants import WIDTH, HEIGHT
+from checkers.constants import WIDTH, HEIGHT, SQUARE_SIZE
 from checkers.board import Board
 
 FPS = 60
@@ -22,7 +22,10 @@ def main():
                 run = False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
+                pos = pygame.mouse.get_pos()
+                col, row = int(pos[0] / SQUARE_SIZE), int(pos[1] / SQUARE_SIZE)
+                selected, pos_movs = board.select_piece(row, col)
+                print(row, col, selected, "Possible movs:", pos_movs)
 
         board.draw_squares(WIN)
         board.draw_pieces(WIN)
